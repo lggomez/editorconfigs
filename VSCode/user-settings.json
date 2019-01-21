@@ -1,0 +1,79 @@
+{
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Monokai",
+    "editor.minimap.enabled": false,
+    "go.enableCodeLens": {
+        "references": false,
+        "runtest": true
+    },
+    "go.delveConfig": {
+        "useApiV1": false,
+        "dlvLoadConfig": {
+            "followPointers": true,
+            "maxVariableRecurse": 3,
+            "maxStringLen": 100,
+            "maxArrayValues": 100,
+            "maxStructFields": -1
+        }
+    },
+    "go.testTimeout": "60s",
+    "go.autocompleteUnimportedPackages": false,
+    "go.languageServerExperimentalFeatures": {
+        "format": false,
+        "autoComplete": true
+    },
+    "go.testFlags": [
+        "-v"
+    ],
+    "git.decorations.enabled": true,
+    "editor.lightbulb.enabled": true,
+    "go.formatTool": "gofmt",
+    "go.lintOnSave": "package",
+    //"go.lintTool": "gometalinter",
+    "go.lintTool": "golint",
+    "files.associations": {
+        "*.toml": "yaml",
+        "Gopkg.lock": "yaml"
+    },
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/tmp": true,
+        "**/vendor": true,
+    },
+    "workbench.statusBar.feedback.visible": false,
+    // "launch": {
+    //     "version": "0.2.0",
+    //     "configurations": [
+    //         {
+    //             "name": "Launch (default)",
+    //             "type": "go",
+    //             "request": "launch",
+    //             "mode": "debug",
+    //             "remotePath": "",
+    //             "port": 2345,
+    //             "host": "127.0.0.1",
+    //             "program": "${fileDirname}",
+    //             "env": {},
+    //             "args": [],
+    //             "showLog": true,
+    //             "useApiV1": false,
+    //             "dlvLoadConfig": {
+    //                 "followPointers": true,
+    //                 "maxVariableRecurse": 1,
+    //                 "maxStringLen": 5,
+    //                 "maxArrayValues": 128,
+    //                 "maxStructFields": -1
+    //             }
+    //         }
+    //     ]
+    // },
+    "terminal.integrated.rendererType": "dom",
+    "editor.accessibilitySupport": "off",
+    "breadcrumbs.enabled": true,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+}
