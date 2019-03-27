@@ -1,27 +1,22 @@
 {
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Monokai",
-    "editor.minimap.enabled": false,
     "go.enableCodeLens": {
         "references": false,
-        "runtest": true
+        "runtest": true,
     },
     "go.delveConfig": {
         "useApiV1": false,
         "dlvLoadConfig": {
             "followPointers": true,
             "maxVariableRecurse": 3,
-            "maxStringLen": 100,
-            "maxArrayValues": 100,
+            "maxStringLen": 64,
+            "maxArrayValues": 200,
             "maxStructFields": -1
         }
     },
     "go.testTimeout": "60s",
     "go.autocompleteUnimportedPackages": false,
-    "go.languageServerExperimentalFeatures": {
-        "format": false,
-        "autoComplete": true
-    },
     "go.testFlags": [
         "-v"
     ],
@@ -29,11 +24,27 @@
     "editor.lightbulb.enabled": true,
     "go.formatTool": "gofmt",
     "go.lintOnSave": "package",
-    //"go.lintTool": "gometalinter",
-    "go.lintTool": "golint",
+    "go.lintTool": "gometalinter",
+    //"go.lintTool": "golint",
+// LANGUAGE SERVER START
+    "go.useLanguageServer": true,
+    "go.alternateTools": {
+        "go-langserver": "bingo"
+    },
+    "go.languageServerFlags": [
+        "-enhance-signature-help",
+        "-format-style=gofmt",
+        "-cache-style=always",
+        "-diagnostics-style=onsave",
+        "-trace",
+    ],
+    "go.languageServerExperimentalFeatures": {
+        "format": true,
+        "autoComplete": true
+    },
+// LANGUAGE SERVER END
     "files.associations": {
-        "*.toml": "yaml",
-        "Gopkg.lock": "yaml"
+        "Gopkg.lock": "toml"
     },
     "search.exclude": {
         "**/.git": true,
@@ -76,4 +87,9 @@
     "telemetry.enableTelemetry": false,
     "workbench.iconTheme": "vscode-icons",
     "vsicons.dontShowNewVersionMessage": true,
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
+    "editor.renderControlCharacters": false,
+    "editor.renderWhitespace": "none",
 }
