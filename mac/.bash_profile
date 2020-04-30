@@ -1,52 +1,47 @@
 #>#####			BASE
 export LANG=en_US.UTF-8
-alias modbsh='sudo nano $HOME/.bash_profile'
-alias rebsh='source $HOME/.bash_profile'
-alias my="PATH=/usr/local/bin:$PATH"
-alias killgps='sudo killall GlobalProtect && sudo killall PanGPS'
-alias vskill='sudo killall -v -9 VShieldScanner'
+export PATH="$PATH:$HOME/apps"
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+export PATH="/Users/lgomez/Library/Python/3.7/bin:$PATH"
 
-alias ttyclock="tty-clock -s -f '%Y/%d/%m %Z' -d 0 -a 5000"
+alias my="PATH=/usr/local/bin:$PATH"
+alias modbsh='sudo nano $HOME/.bash_profile'
+alias modbshc='sudo code $HOME/.bash_profile'
+alias rebsh='source $HOME/.bash_profile'
+alias vskill='sudo killall -v -9 VShieldScanner'
+alias killgps='sudo killall GlobalProtect && sudo killall PanGPS'
+alias ttyclock="tty-clock -s -f '%Y/%d/%m %Z' -d 0"
+
+#>#####                PYTHON
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=~/.virtualenvs
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 #>#####			JAVA
-export JAVA_6_HOME=$(/usr/libexec/java_home -v 1.6)
-export JAVA_7_HOME=$(/usr/libexec/java_home -v 1.7)
-export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
-alias java6='export JAVA_HOME=$JAVA_6_HOME'
-alias java7='export JAVA_HOME=$JAVA_7_HOME'
-alias java8='export JAVA_HOME=$JAVA_8_HOME'
-export PATH="$PATH:$JAVA_HOME/bin"
+# export PATH="$PATH:$JAVA_HOME/bin"
 export PATH="$PATH:/usr/local/sbin"
-#default is Java 6
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
-#MAVEN
-M2_HOME=/usr/local/apache-maven/apache-maven-3.5.0
-export M2_HOME
-export PATH=$PATH:$M2_HOME/bin
-#shipping-jobs mem
-export GRAILS_OPTS="-XX:MaxPermSize=6G -XX:PermSize=6G -Xmx6G -Xms6G -server -XX:+UseParallelGC -Djava.net.preferIPv4Stack=true -Dsun.reflect.inflationThreshold=100000"
 
 #>#####			GO
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export GOBIN=$GOPATH/bin
+export GOFLAGS=""
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-alias gobu="(cd src/api; go build)"
-alias gobu2="(cd src/api; GOCACHE=off go build)"
-alias gote="(cd src/api; go test ./...)"
-alias gote2="(cd src/api; GOCACHE=off go test ./...)"
+alias goplsupd='GO111MODULE=on go get golang.org/x/tools/gopls@latest'
+alias goplsupdm='GO111MODULE=on go get golang.org/x/tools/gopls@master golang.org/x/tools@master'
 alias cleanvendor="(find . -type d -name vendor -exec rm -rf {} \;)"
 
 #>#####			GIT
 eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa > /dev/null 2>&1
 alias resetorigin='git fetch origin && git reset --hard origin/master && git clean -f -d'
 alias resetupstream='git fetch upstream && git reset --hard upstream/master && git clean -f -d'
 alias resetdevelop='git fetch origin && git reset --hard origin/develop && git clean -f -d'
+alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
+alias gitaca='git add . && git commit --amend --no-edit'
 
-
-#>#####			DEV
-ipaddr() { (awk '{print $2}' <(ifconfig eth0 | grep 'inet ')); }
+# DEV
 alias ls="ls -CF"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias grep='grep --color'
@@ -67,18 +62,19 @@ alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
-#>#####                  RUST
-export PATH=$PATH:$HOME/.cargo/bin
-
-#>#####			MISC
-alias sdkinit='source "$HOME/.sdkman/bin/sdkman-init.sh"'
-export SDKMAN_DIR="/Users/lgomez/.sdkman"
-alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+function retval() {
+    if [[ -z $1 ]];then
+        echo '.'
+    else
+        echo $1
+    fi
+}
 
 alias ping='ping -c 5'
 alias clr='clear;echo "Currently logged in on $(tty), as $USER in directory $PWD."'
 alias path='echo -e ${PATH//:/\\n}'
 alias mkdir='mkdir -pv'
+
 # get top process eating memory
 alias psmem='ps -e -orss=,args= | sort -b -k1,1n'
 alias psmem10='ps -e -orss=,args= | sort -b -k1,1n| head -10'
@@ -104,9 +100,7 @@ geteip() {
     curl -s -S https://icanhazip.com
 }
 
-# MacPorts Installer addition on 2018-10-28_at_22:25:01: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-
 # GO version manager
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+gvm use go1.13.8 --default
