@@ -1,10 +1,37 @@
 {
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Monokai",
-    "go.enableCodeLens": {
-        "references": false,
-        "runtest": true,
+    "workbench.iconTheme": "vscode-icons",
+    "editor.suggestSelection": "first",
+    "git.decorations.enabled": true,
+    "editor.lightbulb.enabled": true,
+    "files.associations": {
+        "Gopkg.lock": "toml"
     },
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/tmp": true,
+        "**/vendor": true,
+    },
+    "terminal.integrated.rendererType": "dom",
+    "editor.accessibilitySupport": "off",
+    "breadcrumbs.enabled": true,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "'JetBrains Mono', Hack, Menlo, Monaco, 'Courier New', monospace",
+    "editor.renderControlCharacters": false,
+    "editor.renderWhitespace": "none",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // GOLANG
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
     "go.delveConfig": {
         "useApiV1": false,
         "dlvLoadConfig": {
@@ -20,40 +47,46 @@
     "go.testFlags": [
         "-v"
     ],
-    "git.decorations.enabled": true,
-    "editor.lightbulb.enabled": true,
-    "go.formatTool": "gofmt",
-    "go.lintOnSave": "package",
-    "go.lintTool": "gometalinter",
-    //"go.lintTool": "golint",
-// LANGUAGE SERVER START
     "go.useLanguageServer": true,
-    "go.alternateTools": {
-        "go-langserver": "bingo"
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        // Optional: Disable snippets, as they conflict with completion ranking.
+        "editor.snippetSuggestions": "none",
     },
-    "go.languageServerFlags": [
-        "-enhance-signature-help",
-        "-format-style=gofmt",
-        "-cache-style=always",
-        "-diagnostics-style=onsave",
-        "-trace",
-    ],
-    "go.languageServerExperimentalFeatures": {
-        "format": true,
-        "autoComplete": true
+    "[go.mod]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
     },
-// LANGUAGE SERVER END
-    "files.associations": {
-        "Gopkg.lock": "toml"
+    "gopls": {
+        "ui.completion.usePlaceholders": true,
+        "ui.codelenses": {
+            "generate": true,
+            "gc_details": true,
+            "tidy": true,
+            "upgrade_dependency": true,
+            "vendor": false,
+        },
+        "ui.documentation.hoverKind": "Structured",
+        "formatting.gofumpt": true,
     },
-    "search.exclude": {
-        "**/.git": true,
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/tmp": true,
-        "**/vendor": true,
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.languageServer": "Pylance",
+    "cmake.configureOnOpen": false,
+    "explorer.confirmDragAndDrop": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "go.toolsManagement.autoUpdate": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
     },
-    "workbench.statusBar.feedback.visible": false,
+    "redhat.telemetry.enabled": false
     // "launch": {
     //     "version": "0.2.0",
     //     "configurations": [
@@ -80,16 +113,4 @@
     //         }
     //     ]
     // },
-    "terminal.integrated.rendererType": "dom",
-    "editor.accessibilitySupport": "off",
-    "breadcrumbs.enabled": true,
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "workbench.iconTheme": "vscode-icons",
-    "vsicons.dontShowNewVersionMessage": true,
-    "editor.fontLigatures": true,
-    "editor.minimap.enabled": false,
-    "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
-    "editor.renderControlCharacters": false,
-    "editor.renderWhitespace": "none",
 }

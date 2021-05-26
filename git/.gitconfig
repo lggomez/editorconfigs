@@ -2,6 +2,8 @@
 	excludesfile = /Users/lgomez/.gitignore_global
 	ignorecase = false
 	editor = nano
+[init]
+	defaultBranch = master
 [user]
 	name = lggomez
 	email = luis.gg1990@gmail.com
@@ -9,24 +11,24 @@
 	template = /Users/lgomez/.stCommitMsg
 [url "https://:x-oauth-basic@github.com/"]
 	insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
 [diff]
 	tool = kdiff3
 [difftool]
 	prompt = false
-[difftool "meld"]
-	trustExitCode = true
-	cmd = /Applications/Meld.app/Contents/MacOS/Meld \"$LOCAL\" \"$REMOTE\"
 [merge]
 	tool = kdiff3
 [mergetool]
 	prompt = false
+[difftool "meld"]
+	trustExitCode = true
+	cmd = /Applications/Meld.app/Contents/MacOS/Meld \"$LOCAL\" \"$REMOTE\"
 [mergetool "meld"]
 	trustExitCode = true
 	cmd = open -W -a /Applications/Meld.app/Contents/MacOS/Meld --args \"$([[ "$LOCAL" == /* ]] && echo "$LOCAL" || echo "$PWD/$LOCAL")\"  \"$([[ "$REMOTE" == /* ]] && echo "$REMOTE" || echo "$PWD/$REMOTE")\"

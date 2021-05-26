@@ -8,7 +8,7 @@ export ZSH="/Users/lgomez/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +68,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git-auto-fetch git-prompt colorize zsh_reload zsh-syntax-highlighting zsh-autosuggestions)
+export ZSH_COLORIZE_TOOL=chroma
+export GIT_AUTO_FETCH_INTERVAL=1200 # in seconds
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,31 +100,27 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-POWERLEVEL9K_MODE="awesome-patched"
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 #>#####			BASE
 export LANG=en_US.UTF-8
 export PATH="$PATH:$HOME/apps"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-export PATH="/Users/lgomez/Library/Python/3.7/bin:$PATH"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#>#####			KILLERS
+alias vskill='sudo killall -v -9 VShieldScanner'
+alias killgps='sudo killall GlobalProtect && sudo killall PanGPS'
+
+#>#####			BASE ALIASES
 alias my="PATH=/usr/local/bin:$PATH"
 alias modbsh='sudo nano $HOME/.bash_profile'
 alias modbshc='sudo code $HOME/.bash_profile'
 alias rebsh='source $HOME/.bash_profile'
-alias vskill='sudo killall -v -9 VShieldScanner'
-alias killgps='sudo killall GlobalProtect && sudo killall PanGPS'
 alias ttyclock="tty-clock -s -f '%Y/%d/%m %Z' -d 0"
 
-#>#####                PYTHON
+#>#####         PYTHON
+export PATH="/Users/lgomez/Library/Python/3.7/bin:$PATH"
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=~/.virtualenvs
 [ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
@@ -151,16 +149,18 @@ alias resetdevelop='git fetch origin && git reset --hard origin/develop && git c
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias gitaca='git add . && git commit --amend --no-edit'
 
-# DEV
+#>#####			DEV ALIASES
 alias ls="ls -CF"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
 alias topml='top -f -e -a -stats pid,command,cpu,mem,vsize,th,pstate,time,user -o -mem'
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
-export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
-# ls
+# deprecated by zsh theme
+#export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+#export CLICOLOR=1
+#export LSCOLORS=ExFxBxDxCxegedabagacad
+
+#>#####			LS ALIASES
 alias ls='ls -GFh'
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
@@ -172,17 +172,19 @@ alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
+#>#####			MISC ALIASES
 alias ping='ping -c 5'
 alias clr='clear;echo "Currently logged in on $(tty), as $USER in directory $PWD."'
 alias path='echo -e ${PATH//:/\\n}'
 alias mkdir='mkdir -pv'
 
+#>#####			PS ALIASES
 # get top process eating memory
 alias psmem='ps -e -orss=,args= | sort -b -k1,1n'
 alias psmem10='ps -e -orss=,args= | sort -b -k1,1n| head -10'
 alias hist10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
-# GO version manager
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-gvm use go1.13.8 --default
+#>#####			GVM (go version manager)
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# gvm use go1.13.8 --default
